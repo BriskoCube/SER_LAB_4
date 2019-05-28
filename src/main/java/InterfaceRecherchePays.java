@@ -1,8 +1,11 @@
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
+import org.jdom2.Namespace;
 import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 
@@ -35,10 +38,8 @@ public class InterfaceRecherchePays extends JFrame {
 
             XPathFactory xpath = XPathFactory.instance();
 
-
             Set<String> languages = xPathQuery("/countries/element/languages/element/name", xpath, document);
             Set<String> continents = xPathQuery("/countries/element/region", xpath, document);
-
 
             this.langages = new JComboBox<Object>(languages.toArray());
             this.continents = new JComboBox<Object>(continents.toArray());
@@ -50,12 +51,37 @@ public class InterfaceRecherchePays extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
 
+
                     super.mouseClicked(e);
 
 
-                    // Création des fichiers XSL selon ce qui est demandé
+                    try{
 
-                    /** A compléter... **/
+                        Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
+
+
+                        Element stylesheet = new Element("stylesheet", xslt);
+
+                        Document xslDocument = new Document(stylesheet);
+
+
+                        //JDOM document is ready now, lets write it to file now
+                        XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+                        //output xml to console for debugging
+                        //xmlOutputter.output(doc, System.out);
+                        xmlOutputter.output(xslDocument, new FileOutputStream("test.xsl"));
+
+
+                        // Utiliser les namespace pour xsl
+
+                        // Création des fichiers XSL selon ce qui est demandé
+
+                        /** A compléter... **/
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+
 
                 }
 
@@ -69,6 +95,7 @@ public class InterfaceRecherchePays extends JFrame {
         } catch (JDOMException e) {
             e.printStackTrace();
         }
+
 
 
 
