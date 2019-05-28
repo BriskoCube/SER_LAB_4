@@ -45,6 +45,22 @@ public class InterfaceRecherchePays extends JFrame {
 
 
 
+            createXSL.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                    super.mouseClicked(e);
+
+
+                    // Création des fichiers XSL selon ce qui est demandé
+
+                    /** A compléter... **/
+
+                }
+
+            });
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -55,30 +71,6 @@ public class InterfaceRecherchePays extends JFrame {
         }
 
 
-        createXSL.addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-                super.mouseClicked(e);
-
-                //distinct-values(/countries/element/languages/element/name)
-
-                //distinct-values(/countries/element/region)
-
-
-
-
-
-
-
-                // Création des fichiers XSL selon ce qui est demandé
-
-                /** A compléter... **/
-
-            }
-
-        });
 
         /**
          * A compléter : Remplissage des listes de recherche (avec les continents et les langues parlées dans l'ordre alphabétique)
