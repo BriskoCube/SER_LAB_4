@@ -60,7 +60,57 @@ public class InterfaceRecherchePays extends JFrame {
                         Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
 
 
-                        Element stylesheet = new Element("stylesheet", xslt);
+                       Element stylesheet = new Element("stylesheet", xslt);
+
+                        stylesheet.setAttribute("version", "1.0");
+
+                        Element output = new Element("output", xslt);
+                        output.setAttribute("method", "html").setAttribute("encoding", "UTF-8");
+                        output.setAttribute("doctype-public", "-//W3C//DTD HTML 4.01//EN");
+                        output.setAttribute(  "doctype-system" ,"http://www.w3.org/TR/html4/strict.dtd");
+                        output.setAttribute("indent", "yes");
+
+                        stylesheet.addContent(output);
+
+                        Element template = new Element("template", xslt);
+                        template.setAttribute("match", "/");
+
+                        Element html = new Element("html");
+                        Element head = new Element("head");
+                        // import des CSS et JS pour bootstrap
+                        Element linkBootstrap = new Element("link");
+                        linkBootstrap.setAttribute("rel", "stylesheet");
+                        linkBootstrap.setAttribute("href", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+                        linkBootstrap.setAttribute("integrity", "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T");
+                        linkBootstrap.setAttribute("crossorigin", "anonymous");
+
+                        Element scriptJquery = new Element("script");
+                        scriptJquery.setAttribute("src", "https://code.jquery.com/jquery-3.3.1.slim.min.js");
+                        scriptJquery.setAttribute("integrity", "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo");
+                        scriptJquery.setAttribute("crossorigin", "anonymous");
+
+                        Element scriptPopper = new Element("script");
+                        scriptPopper.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js");
+                        scriptPopper.setAttribute("integrity", "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1");
+                        scriptPopper.setAttribute("crossorigin", "anonymous");
+
+                        Element scriptBootstrap = new Element("script");
+                        scriptBootstrap.setAttribute("src", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js");
+                        scriptBootstrap.setAttribute("integrity", "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM");
+                        scriptBootstrap.setAttribute("crossorigin", "anonymous");
+
+                        head.addContent(linkBootstrap);
+                        head.addContent(scriptBootstrap);
+                        head.addContent(scriptJquery);
+                        head.addContent(scriptPopper);
+
+                        Element body = new Element("body");
+
+
+                        html.addContent(head);
+                        html.addContent(body);
+
+                        output.addContent(html);
 
                         Document xslDocument = new Document(stylesheet);
 
