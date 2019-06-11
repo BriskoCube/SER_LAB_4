@@ -1,7 +1,4 @@
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.Namespace;
+import org.jdom2.*;
 import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
@@ -16,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class InterfaceRecherchePays extends JFrame {
@@ -60,52 +58,30 @@ public class InterfaceRecherchePays extends JFrame {
                         Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
 
 
-                       Element stylesheet = new Element("stylesheet", xslt);
+                        Element stylesheet = new Element("stylesheet", xslt);
 
                         stylesheet.setAttribute("version", "1.0");
 
+                        // output
                         Element output = new Element("output", xslt);
                         output.setAttribute("method", "html").setAttribute("encoding", "UTF-8");
                         output.setAttribute("doctype-public", "-//W3C//DTD HTML 4.01//EN");
                         output.setAttribute(  "doctype-system" ,"http://www.w3.org/TR/html4/strict.dtd");
                         output.setAttribute("indent", "yes");
-
                         stylesheet.addContent(output);
 
+                        // template
                         Element template = new Element("template", xslt);
                         template.setAttribute("match", "/");
 
+                        // html
                         Element html = new Element("html");
-                        Element head = new Element("head");
-                        // import des CSS et JS pour bootstrap
-                        Element linkBootstrap = new Element("link");
-                        linkBootstrap.setAttribute("rel", "stylesheet");
-                        linkBootstrap.setAttribute("href", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
-                        linkBootstrap.setAttribute("integrity", "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T");
-                        linkBootstrap.setAttribute("crossorigin", "anonymous");
 
-                        Element scriptJquery = new Element("script");
-                        scriptJquery.setAttribute("src", "https://code.jquery.com/jquery-3.3.1.slim.min.js");
-                        scriptJquery.setAttribute("integrity", "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo");
-                        scriptJquery.setAttribute("crossorigin", "anonymous");
+                        // head
+                        Element head = generateHead();
 
-                        Element scriptPopper = new Element("script");
-                        scriptPopper.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js");
-                        scriptPopper.setAttribute("integrity", "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1");
-                        scriptPopper.setAttribute("crossorigin", "anonymous");
-
-                        Element scriptBootstrap = new Element("script");
-                        scriptBootstrap.setAttribute("src", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js");
-                        scriptBootstrap.setAttribute("integrity", "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM");
-                        scriptBootstrap.setAttribute("crossorigin", "anonymous");
-
-                        head.addContent(linkBootstrap);
-                        head.addContent(scriptBootstrap);
-                        head.addContent(scriptJquery);
-                        head.addContent(scriptPopper);
-
-                        Element body = new Element("body");
-
+                        // body
+                        Element body = generateBody(xslt);
 
                         html.addContent(head);
                         html.addContent(body);
@@ -177,6 +153,91 @@ public class InterfaceRecherchePays extends JFrame {
         setTitle("Interface de recherche de pays");
 
 
+    }
+
+    private Element generateBody(Namespace xslt) {
+        Element body = new Element("body");
+        // containers
+        Element containersDiv = generateDivElement("containers");
+
+        Element rowDiv = generateDivElement("row");
+
+        Element forEach = new Element("for-each", xslt);
+        forEach.setAttribute("select", "countries/element");
+
+        Element colDiv = generateDivElement("col-2 mt-2 mx-auto");
+
+        Element button = new Element("button");
+        button.setAttribute("class", "btn btn-light");
+        button.setAttribute("data-toggle", "modal");
+
+        Element attribute = new Element("attribute", xslt);
+        attribute.setAttribute("name", "data-target");
+        attribute.setText(".modal-<xsl:value-of select=\"alpha3Code\" />");
+
+        Element valueOf = new Element("value-of", xslt);
+        valueOf.setAttribute("select", "name");
+
+        Element img = new Element("img");
+        img.setAttribute("class", "flag pl-1");
+
+        Element attributeSrc = new Element("attribute", xslt);
+        Element valueOfFlag = new Element("value-of", xslt);
+        valueOfFlag.setAttribute("select", "flag");
+
+        attributeSrc.setContent(attributeSrc);
+
+        button.addContent(attribute);
+        button.addContent(valueOf);
+        button.addContent(img);
+        colDiv.addContent(button);
+        forEach.addContent(colDiv);
+        rowDiv.addContent(forEach);
+        containersDiv.addContent(rowDiv);
+        body.addContent(containersDiv);
+
+        return body;
+    }
+
+    private Element generateHead() {
+        Element head = new Element("head");
+        // import des CSS et JS pour bootstrap
+        Element linkBootstrap = new Element("link");
+        linkBootstrap.setAttribute("rel", "stylesheet");
+        linkBootstrap.setAttribute("href", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
+        linkBootstrap.setAttribute("integrity", "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T");
+        linkBootstrap.setAttribute("crossorigin", "anonymous");
+
+        Element scriptJquery = new Element("script");
+        scriptJquery.setAttribute("src", "https://code.jquery.com/jquery-3.3.1.slim.min.js");
+        scriptJquery.setAttribute("integrity", "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo");
+        scriptJquery.setAttribute("crossorigin", "anonymous");
+
+        Element scriptPopper = new Element("script");
+        scriptPopper.setAttribute("src", "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js");
+        scriptPopper.setAttribute("integrity", "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1");
+        scriptPopper.setAttribute("crossorigin", "anonymous");
+
+        Element scriptBootstrap = new Element("script");
+        scriptBootstrap.setAttribute("src", "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js");
+        scriptBootstrap.setAttribute("integrity", "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM");
+        scriptBootstrap.setAttribute("crossorigin", "anonymous");
+
+        Element style = new Element("style");
+        style.setText(".flag{max-width:20px;}");
+
+        head.addContent(style);
+        head.addContent(linkBootstrap);
+        head.addContent(scriptBootstrap);
+        head.addContent(scriptJquery);
+        head.addContent(scriptPopper);
+        return head;
+    }
+
+    private Element generateDivElement(String attribute){
+        Element div = new Element("div");
+        div.setAttribute("class", attribute);
+        return div;
     }
 
     public Set<String> xPathQuery(String expressions, XPathFactory xpath, Document document){
