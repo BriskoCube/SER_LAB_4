@@ -86,7 +86,8 @@ public class InterfaceRecherchePays extends JFrame {
                         html.addContent(head);
                         html.addContent(body);
 
-                        output.addContent(html);
+                        template.addContent(html);
+                        stylesheet.addContent(template);
 
                         Document xslDocument = new Document(stylesheet);
 
@@ -95,7 +96,7 @@ public class InterfaceRecherchePays extends JFrame {
                         XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
                         //output xml to console for debugging
                         //xmlOutputter.output(doc, System.out);
-                        xmlOutputter.output(xslDocument, new FileOutputStream("test.xsl"));
+                        xmlOutputter.output(xslDocument, new FileOutputStream("countries.xsl"));
 
 
                         // Utiliser les namespace pour xsl
@@ -159,12 +160,117 @@ public class InterfaceRecherchePays extends JFrame {
         Element body = new Element("body");
         // containers
         Element containersDiv = generateDivElement("containers");
-
         Element rowDiv = generateDivElement("row");
 
         Element forEach = new Element("for-each", xslt);
         forEach.setAttribute("select", "countries/element");
 
+        // Génération des flags
+        generateFlags(xslt, forEach);
+        generateModals(xslt, forEach);
+
+        rowDiv.addContent(forEach);
+        containersDiv.addContent(rowDiv);
+        body.addContent(containersDiv);
+
+        return body;
+    }
+
+    private void generateModals(Namespace xslt, Element forEach) {
+        // Génération des modals
+        Element div = generateDivElement("modal fade bd-example-modal-sm");
+        div.setAttribute("tabindex", "-1");
+        div.setAttribute("role", "dialog");
+        div.setAttribute("aria-labelledby", "mySmallModalLabel");
+        div.setAttribute("aria-hidden","true");
+
+        Element attributeModal = new Element("attribute", xslt);
+        attributeModal.setAttribute("name", "class");
+        attributeModal.setText("modal fade modal-<xsl:value-of select=\"alpha3Code\" />");
+
+        // Modal
+        Element divModalDial = generateDivElement("modal-dialog modal-md");
+        Element divModalCont = generateDivElement("modal-content");
+
+        // Modal Header
+        Element divModalHeader = generateDivElement("modal-header");
+        Element h5ModalTitle = new Element("h5");
+        h5ModalTitle.setAttribute("class", "modal-title");
+        h5ModalTitle.setAttribute("id", "exampleModalLabel");
+        Element valueOfTransl = new Element("value-of", xslt);
+        valueOfTransl.setAttribute("select", "translations/fr");
+
+        h5ModalTitle.addContent(valueOfTransl);
+        divModalHeader.addContent(h5ModalTitle);
+        divModalCont.addContent(divModalHeader);
+
+        // Modal body
+        Element divModalBody = generateDivElement("modal-body");
+        Element divRow = generateDivElement("row");
+        Element divCol = generateDivElement("col-6");
+        Element imgW = new Element("img").setAttribute("class", "w-100");
+        Element attributeSrc = new Element("attribute", xslt).setAttribute("name","src");
+        Element valueOfFlag = new Element("value-of", xslt).setAttribute("select","flag");
+
+        // General Infos
+        Element divCol2 = generateDivElement("col-6");
+        Element pCapitale = new Element("p").setText("Capitale: <xsl:value-of select=\"capital\" />");
+        Element pPopulation = new Element("p").setText("Polulation: <xsl:value-of select=\"population\" /> habitants");
+        Element pSuperficie = new Element("p").setText("Superficie: <xsl:value-of select=\"area\" /> km<sup>2</sup>");
+        Element pContinent = new Element("p").setText("Continent: <xsl:value-of select=\"region\" />");
+        Element pSousContinent = new Element("p").setText("Sous-Continent: <xsl:value-of select=\"subregion\" />");
+
+        // Languages
+        Element divCol12 = generateDivElement("col-12");
+        Element divCard = generateDivElement("card bg-light mb-3 w-100");
+        Element divCardHeader = generateDivElement("card-header").setText("Langues Parlées");
+        Element divCardBody = generateDivElement("card-body");
+        Element ul = new Element("ul").setAttribute("class", "list-group");
+        Element xslForEach = new Element("for-each", xslt).setAttribute("select","languages/element");
+        Element li = new Element("li").setAttribute("class", "list-group-item");
+        Element valueOfName = new Element("value-of", xslt).setAttribute("select", "name");
+
+        // Modal Footer
+        Element modalFooter = generateDivElement("modal-footer");
+        Element button = new Element("button");
+        button.setAttribute("type", "button");
+        button.setAttribute("class", "btn btn-primary");
+        button.setAttribute("data-dismiss", "modal");
+        button.setText("Fermer");
+
+        modalFooter.addContent(button);
+
+        divModalCont.addContent(divModalBody);
+        divModalCont.addContent(modalFooter);
+        li.addContent(valueOfName);
+        xslForEach.addContent(li);
+        ul.addContent(xslForEach);
+        divCardBody.addContent(ul);
+        divCard.addContent(divCardHeader);
+        divCard.addContent(divCardBody);
+        divCol12.addContent(divCard);
+
+        divCol2.addContent(pCapitale);
+        divCol2.addContent(pPopulation);
+        divCol2.addContent(pSuperficie);
+        divCol2.addContent(pContinent);
+        divCol2.addContent(pSousContinent);
+
+        attributeSrc.addContent(valueOfFlag);
+        imgW.addContent(attributeSrc);
+        divCol.addContent(imgW);
+        divRow.addContent(divCol);
+        divRow.addContent(divCol2);
+        divRow.addContent(divCol12);
+        divModalBody.addContent(divRow);
+
+        divModalDial.addContent(divModalCont);
+        div.addContent(attributeModal);
+        div.addContent(divModalDial);
+        forEach.addContent(div);
+    }
+
+    private void generateFlags(Namespace xslt, Element forEach) {
         Element colDiv = generateDivElement("col-2 mt-2 mx-auto");
 
         Element button = new Element("button");
@@ -176,27 +282,23 @@ public class InterfaceRecherchePays extends JFrame {
         attribute.setText(".modal-<xsl:value-of select=\"alpha3Code\" />");
 
         Element valueOf = new Element("value-of", xslt);
-        valueOf.setAttribute("select", "name");
+        valueOf.setAttribute("select", "translations/fr");
 
         Element img = new Element("img");
         img.setAttribute("class", "flag pl-1");
 
         Element attributeSrc = new Element("attribute", xslt);
+        attributeSrc.setAttribute("name", "src");
         Element valueOfFlag = new Element("value-of", xslt);
         valueOfFlag.setAttribute("select", "flag");
 
-        attributeSrc.setContent(attributeSrc);
-
+        attributeSrc.addContent(valueOfFlag);
+        img.addContent(attributeSrc);
         button.addContent(attribute);
         button.addContent(valueOf);
         button.addContent(img);
         colDiv.addContent(button);
         forEach.addContent(colDiv);
-        rowDiv.addContent(forEach);
-        containersDiv.addContent(rowDiv);
-        body.addContent(containersDiv);
-
-        return body;
     }
 
     private Element generateHead() {

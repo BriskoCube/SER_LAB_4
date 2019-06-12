@@ -1,3 +1,4 @@
+<?xml-stylesheet type="text/xsl" href="countries.xsl"?>
 <countries>
    <element>
       <alpha2Code>AF</alpha2Code>

@@ -29,7 +29,7 @@
                             <div class="col-2 mt-2 mx-auto ">
                                 <button class="btn btn-light" data-toggle="modal">
                                     <xsl:attribute name="data-target">.modal-<xsl:value-of select="alpha3Code" /></xsl:attribute>
-                                    <xsl:value-of select="name" />
+                                    <xsl:value-of select="translations/fr" />
                                     <img class="flag pl-1">
                                         <xsl:attribute name="src">
                                             <xsl:value-of select="flag" />
@@ -43,7 +43,7 @@
 
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><xsl:value-of select="name" /></h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><xsl:value-of select="translations/fr" /></h5>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
