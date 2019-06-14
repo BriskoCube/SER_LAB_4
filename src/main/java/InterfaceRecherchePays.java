@@ -15,120 +15,138 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InterfaceRecherchePays extends JFrame {
 
     private JPanel panelRecherche = new JPanel(new FlowLayout());
 
-    private JComboBox<Object> continents;
-    private JComboBox<Object> langages;
+    private JComboBox<String> continents = new JComboBox<>();
+    private JComboBox<String> langages = new JComboBox<>();
     private JButton createXSL = new JButton("Générer XSL");
     private JTextField superficieMin = new JTextField(5);
     private JTextField superficieMax = new JTextField(5);
 
     public InterfaceRecherchePays(File xmlFile) {
 
-        try{
-            InputStream in = new FileInputStream(xmlFile);
-            SAXBuilder builder = new SAXBuilder();
-            Document document = builder.build(in);
+        createXSL.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
 
-            XPathFactory xpath = XPathFactory.instance();
-
-            Set<String> languages = xPathQuery("/countries/element/languages/element/name", xpath, document);
-            Set<String> continents = xPathQuery("/countries/element/region", xpath, document);
-
-            this.langages = new JComboBox<Object>(languages.toArray());
-            this.continents = new JComboBox<Object>(continents.toArray());
+                super.mouseClicked(e);
 
 
+                try{
 
-            createXSL.addMouseListener(new MouseAdapter() {
-
-                @Override
-                public void mouseClicked(MouseEvent e) {
+                    Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
 
 
-                    super.mouseClicked(e);
+                    Element stylesheet = new Element("stylesheet", xslt);
+
+                    stylesheet.setAttribute("version", "1.0");
+
+                    // output
+                    Element output = new Element("output", xslt);
+                    output.setAttribute("method", "html").setAttribute("encoding", "UTF-8");
+                    output.setAttribute("doctype-public", "-//W3C//DTD HTML 4.01//EN");
+                    output.setAttribute(  "doctype-system" ,"http://www.w3.org/TR/html4/strict.dtd");
+                    output.setAttribute("indent", "yes");
+                    stylesheet.addContent(output);
+
+                    // template
+                    Element template = new Element("template", xslt);
+                    template.setAttribute("match", "/");
+
+                    // html
+                    Element html = new Element("html");
+
+                    // head
+                    Element head = generateHead();
+
+                    // body
+                    Element body = generateBody(xslt);
+
+                    html.addContent(head);
+                    html.addContent(body);
+
+                    template.addContent(html);
+                    stylesheet.addContent(template);
+
+                    Document xslDocument = new Document(stylesheet);
 
 
-                    try{
-
-                        Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
-
-
-                        Element stylesheet = new Element("stylesheet", xslt);
-
-                        stylesheet.setAttribute("version", "1.0");
-
-                        // output
-                        Element output = new Element("output", xslt);
-                        output.setAttribute("method", "html").setAttribute("encoding", "UTF-8");
-                        output.setAttribute("doctype-public", "-//W3C//DTD HTML 4.01//EN");
-                        output.setAttribute(  "doctype-system" ,"http://www.w3.org/TR/html4/strict.dtd");
-                        output.setAttribute("indent", "yes");
-                        stylesheet.addContent(output);
-
-                        // template
-                        Element template = new Element("template", xslt);
-                        template.setAttribute("match", "/");
-
-                        // html
-                        Element html = new Element("html");
-
-                        // head
-                        Element head = generateHead();
-
-                        // body
-                        Element body = generateBody(xslt);
-
-                        html.addContent(head);
-                        html.addContent(body);
-
-                        template.addContent(html);
-                        stylesheet.addContent(template);
-
-                        Document xslDocument = new Document(stylesheet);
+                    //JDOM document is ready now, lets write it to file now
+                    XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+                    //output xml to console for debugging
+                    //xmlOutputter.output(doc, System.out);
+                    xmlOutputter.output(xslDocument, new FileOutputStream("countries.xsl"));
 
 
-                        //JDOM document is ready now, lets write it to file now
-                        XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-                        //output xml to console for debugging
-                        //xmlOutputter.output(doc, System.out);
-                        xmlOutputter.output(xslDocument, new FileOutputStream("countries.xsl"));
+                    // Utiliser les namespace pour xsl
 
+                    // Création des fichiers XSL selon ce qui est demandé
 
-                        // Utiliser les namespace pour xsl
-
-                        // Création des fichiers XSL selon ce qui est demandé
-
-                        /** A compléter... **/
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-
-
-
+                    /** A compléter... **/
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
 
-            });
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JDOMException e) {
-            e.printStackTrace();
-        }
+            }
 
-
+        });
 
 
         /**
          * A compléter : Remplissage des listes de recherche (avec les continents et les langues parlées dans l'ordre alphabétique)
          */
+
+        SAXBuilder builder = new SAXBuilder();
+        Document document = null;
+
+        try {
+            // parse and load file into memory
+            InputStream in = new BufferedInputStream(new FileInputStream(xmlFile));
+            document = builder.build(in);
+        } catch (JDOMException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // create xpath factory
+        XPathFactory xpath = XPathFactory.instance();
+
+        System.out.println("1. select all continents");
+        XPathExpression<Element> expr = xpath.compile("//region", Filters.element());
+        java.util.List<Element> continentsDuplicate = expr.evaluate(document);
+        java.util.List<String> continentNames = continentsDuplicate.stream()
+                .map(element -> element.getValue().trim())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        for (String continent : continentNames){
+            if(!continent.isEmpty()) {
+                continents.addItem(continent);
+            }
+        }
+
+        System.out.println("1. select all languages");
+        XPathExpression<Element> exprLanguage = xpath.compile("//languages/element/name", Filters.element());
+        java.util.List<Element> languageDuplicate = exprLanguage.evaluate(document);
+        java.util.List<String> languageNames = languageDuplicate.stream()
+                .map(element -> element.getValue().trim())
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        for (String language : languageNames){
+            if(!language.isEmpty()) {
+                langages.addItem(language);
+            }
+        }
 
         setLayout(new BorderLayout());
 
