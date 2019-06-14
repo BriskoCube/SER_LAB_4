@@ -186,7 +186,9 @@ public class InterfaceRecherchePays extends JFrame {
 
         Element attributeModal = new Element("attribute", xslt);
         attributeModal.setAttribute("name", "class");
-        attributeModal.setText("modal fade modal-<xsl:value-of select=\"alpha3Code\" />");
+        Element valueOfAlpha = new Element("value-of", xslt);
+        valueOfAlpha.setAttribute("select", "concat('modal fade modal-',alpha3Code)");
+        attributeModal.addContent(valueOfAlpha);
 
         // Modal
         Element divModalDial = generateDivElement("modal-dialog modal-md");
@@ -214,11 +216,16 @@ public class InterfaceRecherchePays extends JFrame {
 
         // General Infos
         Element divCol2 = generateDivElement("col-6");
-        Element pCapitale = new Element("p").setText("Capitale: <xsl:value-of select=\"capital\" />");
-        Element pPopulation = new Element("p").setText("Polulation: <xsl:value-of select=\"population\" /> habitants");
-        Element pSuperficie = new Element("p").setText("Superficie: <xsl:value-of select=\"area\" /> km<sup>2</sup>");
-        Element pContinent = new Element("p").setText("Continent: <xsl:value-of select=\"region\" />");
-        Element pSousContinent = new Element("p").setText("Sous-Continent: <xsl:value-of select=\"subregion\" />");
+        Element pCapitale = new Element("p");
+        pCapitale.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Capitale: ', capitale)"));
+        Element pPopulation = new Element("p");
+        pPopulation.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Population: ', population, ' habitants')"));
+        Element pSuperficie = new Element("p");
+        pSuperficie.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Superficie: ', area, ' km²')"));
+        Element pContinent = new Element("p");
+        pContinent.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Continent: ', region)"));
+        Element pSousContinent = new Element("p");
+        pSousContinent.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Sous-continent: ', subregion)"));
 
         // Languages
         Element divCol12 = generateDivElement("col-12");
@@ -279,7 +286,9 @@ public class InterfaceRecherchePays extends JFrame {
 
         Element attribute = new Element("attribute", xslt);
         attribute.setAttribute("name", "data-target");
-        attribute.setText(".modal-<xsl:value-of select=\"alpha3Code\" />");
+        Element valueOfAlpha = new Element("value-of", xslt);
+        valueOfAlpha.setAttribute("select", "concat('.modal-',alpha3Code)");
+        attribute.addContent(valueOfAlpha);
 
         Element valueOf = new Element("value-of", xslt);
         valueOf.setAttribute("select", "translations/fr");
@@ -330,8 +339,8 @@ public class InterfaceRecherchePays extends JFrame {
 
         head.addContent(style);
         head.addContent(linkBootstrap);
-        head.addContent(scriptBootstrap);
         head.addContent(scriptJquery);
+        head.addContent(scriptBootstrap);
         head.addContent(scriptPopper);
         return head;
     }

@@ -28,7 +28,7 @@
                         <xsl:for-each select="countries/element">
                             <div class="col-2 mt-2 mx-auto ">
                                 <button class="btn btn-light" data-toggle="modal">
-                                    <xsl:attribute name="data-target">.modal-<xsl:value-of select="alpha3Code" /></xsl:attribute>
+                                    <xsl:attribute name="data-target"><xsl:value-of select="concat('.modal-',alpha3Code)" /></xsl:attribute>
                                     <xsl:value-of select="translations/fr" />
                                     <img class="flag pl-1">
                                         <xsl:attribute name="src">
@@ -38,7 +38,7 @@
                                 </button>
                             </div>
                             <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                <xsl:attribute name="class">modal fade modal-<xsl:value-of select="alpha3Code" /></xsl:attribute>
+                                <xsl:attribute name="class"><xsl:value-of select="concat('modal fade modal-',alpha3Code)" /></xsl:attribute>
                                 <div class="modal-dialog modal-md">
 
                                     <div class="modal-content">

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3caefb86-bff5-40c7-835c-7d3a7ab85188" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/countries.xml" beforeDir="false" afterPath="$PROJECT_DIR$/countries.xml" afterDir="false" />
+    <list default="true" id="3caefb86-bff5-40c7-835c-7d3a7ab85188" name="Default Changelist" comment="bien taff">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/countries.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/countries.xsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/html.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/html.xsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/test.xsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/InterfaceRecherchePays.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/InterfaceRecherchePays.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,89 +20,93 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1939">
-              <caret line="183" column="30" lean-forward="true" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/countries.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="55" selection-start-column="55" selection-end-column="55" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/countries.xsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="19" column="30" selection-start-line="19" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.xsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="17" column="59" lean-forward="true" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
-              <folding>
-                <element signature="e#1476#1480#0" expanded="true" />
-                <element signature="e#2050#2054#0" expanded="true" />
-                <element signature="e#2088#2092#0" expanded="true" />
-                <element signature="e#2929#2933#0" expanded="true" />
-                <element signature="e#2963#2967#0" expanded="true" />
-                <element signature="e#3013#3017#0" expanded="true" />
-                <element signature="e#3051#3055#0" expanded="true" />
-                <element signature="e#3111#3115#0" expanded="true" />
-                <element signature="e#3143#3147#0" expanded="true" />
-                <element signature="e#3150#3154#0" expanded="true" />
-                <element signature="e#3157#3161#0" expanded="true" />
-                <element signature="e#3162#3166#0" expanded="true" />
-                <element signature="e#3170#3174#0" expanded="true" />
-                <element signature="e#3219#3223#0" expanded="true" />
-                <element signature="e#3253#3257#0" expanded="true" />
-                <element signature="e#3307#3311#0" expanded="true" />
-                <element signature="e#3344#3348#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.html">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/html.xsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
-              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="555">
+                  <caret line="341" column="38" selection-start-line="341" selection-start-column="38" selection-end-line="341" selection-end-column="38" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/countries.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="55" selection-start-column="55" selection-end-column="55" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/countries.xsl">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="120">
+                  <caret line="8" column="74" selection-start-line="8" selection-start-column="74" selection-end-line="8" selection-end-column="74" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test.xsl">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="255">
+                  <caret line="17" column="59" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
+                  <folding>
+                    <element signature="e#1476#1480#0" expanded="true" />
+                    <element signature="e#2050#2054#0" expanded="true" />
+                    <element signature="e#2088#2092#0" expanded="true" />
+                    <element signature="e#2929#2933#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test.html">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/pom.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="360">
+                  <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html.xsl">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="480">
+                  <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/html.xsl">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="480">
+                  <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -120,9 +125,9 @@
       <list>
         <option value="$PROJECT_DIR$/test.xsl" />
         <option value="$PROJECT_DIR$/countries.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java" />
         <option value="$PROJECT_DIR$/html.xsl" />
         <option value="$PROJECT_DIR$/countries.xsl" />
+        <option value="$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java" />
       </list>
     </option>
   </component>
@@ -160,11 +165,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="960" />
-    <option name="y" value="42" />
-    <option name="width" value="960" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1" />
+    <option name="y" value="41" />
+    <option name="width" value="1922" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -172,7 +177,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,9 +188,11 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
@@ -238,7 +244,10 @@
       <workItem from="1559026755177" duration="2241000" />
       <workItem from="1560235619252" duration="11000" />
       <workItem from="1560235667049" duration="4295000" />
-      <workItem from="1560351738703" duration="4907000" />
+      <workItem from="1560351738703" duration="5143000" />
+      <workItem from="1560414129187" duration="46000" />
+      <workItem from="1560542851075" duration="1737000" />
+      <workItem from="1560545145786" duration="47000" />
     </task>
     <task id="LOCAL-00001" summary="Génération d'une partie du header">
       <created>1560237346008</created>
@@ -258,13 +267,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11454000" />
+    <option name="totallyTimeSpent" value="13520000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="42" width="960" height="1038" extended-state="4" />
+    <frame x="-1" y="41" width="1922" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32822758" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.06823028" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -273,7 +282,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32855567" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3278328" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -308,7 +317,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java</url>
-          <line>339</line>
+          <line>348</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -316,6 +325,26 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/countries.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="55" selection-start-column="55" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.xsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="59" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
+          <folding>
+            <element signature="e#1476#1480#0" expanded="true" />
+            <element signature="e#2050#2054#0" expanded="true" />
+            <element signature="e#2088#2092#0" expanded="true" />
+            <element signature="e#2929#2933#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -326,60 +355,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.xsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="17" column="59" lean-forward="true" selection-start-line="17" selection-start-column="59" selection-end-line="17" selection-end-column="59" />
-          <folding>
-            <element signature="e#1476#1480#0" expanded="true" />
-            <element signature="e#2050#2054#0" expanded="true" />
-            <element signature="e#2088#2092#0" expanded="true" />
-            <element signature="e#2929#2933#0" expanded="true" />
-            <element signature="e#2963#2967#0" expanded="true" />
-            <element signature="e#3013#3017#0" expanded="true" />
-            <element signature="e#3051#3055#0" expanded="true" />
-            <element signature="e#3111#3115#0" expanded="true" />
-            <element signature="e#3143#3147#0" expanded="true" />
-            <element signature="e#3150#3154#0" expanded="true" />
-            <element signature="e#3157#3161#0" expanded="true" />
-            <element signature="e#3162#3166#0" expanded="true" />
-            <element signature="e#3170#3174#0" expanded="true" />
-            <element signature="e#3219#3223#0" expanded="true" />
-            <element signature="e#3253#3257#0" expanded="true" />
-            <element signature="e#3307#3311#0" expanded="true" />
-            <element signature="e#3344#3348#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1939">
-          <caret line="183" column="30" lean-forward="true" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/countries.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="55" selection-start-column="55" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/html.xsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+        <state relative-caret-position="480">
+          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/countries.xsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="19" column="30" selection-start-line="19" selection-end-line="20" />
+        <state relative-caret-position="120">
+          <caret line="8" column="74" selection-start-line="8" selection-start-column="74" selection-end-line="8" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/InterfaceRecherchePays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="341" column="38" selection-start-line="341" selection-start-column="38" selection-end-line="341" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
