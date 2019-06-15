@@ -11,10 +11,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InterfaceRecherchePays extends JFrame {
@@ -37,8 +35,10 @@ public class InterfaceRecherchePays extends JFrame {
 
                 super.mouseClicked(e);
 
+                String filters = makeFilters();
 
-                try{
+
+                try {
 
                     Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
 
@@ -51,7 +51,7 @@ public class InterfaceRecherchePays extends JFrame {
                     Element output = new Element("output", xslt);
                     output.setAttribute("method", "html").setAttribute("encoding", "UTF-8");
                     output.setAttribute("doctype-public", "-//W3C//DTD HTML 4.01//EN");
-                    output.setAttribute(  "doctype-system" ,"http://www.w3.org/TR/html4/strict.dtd");
+                    output.setAttribute("doctype-system", "http://www.w3.org/TR/html4/strict.dtd");
                     output.setAttribute("indent", "yes");
                     stylesheet.addContent(output);
 
@@ -66,7 +66,7 @@ public class InterfaceRecherchePays extends JFrame {
                     Element head = generateHead();
 
                     // body
-                    Element body = generateBody(xslt);
+                    Element body = generateBody(xslt, filters);
 
                     html.addContent(head);
                     html.addContent(body);
@@ -92,7 +92,6 @@ public class InterfaceRecherchePays extends JFrame {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
 
 
             }
@@ -128,8 +127,10 @@ public class InterfaceRecherchePays extends JFrame {
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
-        for (String continent : continentNames){
-            if(!continent.isEmpty()) {
+
+        continents.addItem("");
+        for (String continent : continentNames) {
+            if (!continent.isEmpty()) {
                 continents.addItem(continent);
             }
         }
@@ -142,8 +143,10 @@ public class InterfaceRecherchePays extends JFrame {
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
-        for (String language : languageNames){
-            if(!language.isEmpty()) {
+
+        langages.addItem("");
+        for (String language : languageNames) {
+            if (!language.isEmpty()) {
                 langages.addItem(language);
             }
         }
@@ -174,14 +177,45 @@ public class InterfaceRecherchePays extends JFrame {
 
     }
 
-    private Element generateBody(Namespace xslt) {
+    private String makeFilters() {
+        List<String> filterList = new ArrayList<>();
+
+        String contient = (String) continents.getSelectedItem();
+        String langage = (String) langages.getSelectedItem();
+        String max = superficieMax.getText();
+        String min = superficieMin.getText();
+
+
+        if (!contient.isEmpty()) {
+            filterList.add("region=\"" + contient + "\"");
+        }
+
+        if (!langage.isEmpty()) {
+            filterList.add("languages/element/name=\"" + langage + "\"");
+        }
+
+        if(!max.isEmpty()){
+            filterList.add("area<=\"" + max + "\"");
+        }
+
+        if(!min.isEmpty()){
+            filterList.add("area>=\"" + min + "\"");
+        }
+
+        if(filterList.size() > 0)
+            return "[" + String.join(" and ", filterList) + "]";
+
+        return "";
+    }
+
+    private Element generateBody(Namespace xslt, String filters) {
         Element body = new Element("body");
         // containers
         Element containersDiv = generateDivElement("containers");
         Element rowDiv = generateDivElement("row");
 
         Element forEach = new Element("for-each", xslt);
-        forEach.setAttribute("select", "countries/element");
+        forEach.setAttribute("select", "countries/element" + filters);
 
         // Génération des flags
         generateFlags(xslt, forEach);
@@ -200,7 +234,7 @@ public class InterfaceRecherchePays extends JFrame {
         div.setAttribute("tabindex", "-1");
         div.setAttribute("role", "dialog");
         div.setAttribute("aria-labelledby", "mySmallModalLabel");
-        div.setAttribute("aria-hidden","true");
+        div.setAttribute("aria-hidden", "true");
 
         Element attributeModal = new Element("attribute", xslt);
         attributeModal.setAttribute("name", "class");
@@ -229,8 +263,8 @@ public class InterfaceRecherchePays extends JFrame {
         Element divRow = generateDivElement("row");
         Element divCol = generateDivElement("col-6");
         Element imgW = new Element("img").setAttribute("class", "w-100");
-        Element attributeSrc = new Element("attribute", xslt).setAttribute("name","src");
-        Element valueOfFlag = new Element("value-of", xslt).setAttribute("select","flag");
+        Element attributeSrc = new Element("attribute", xslt).setAttribute("name", "src");
+        Element valueOfFlag = new Element("value-of", xslt).setAttribute("select", "flag");
 
         // General Infos
         Element divCol2 = generateDivElement("col-6");
@@ -251,7 +285,7 @@ public class InterfaceRecherchePays extends JFrame {
         Element divCardHeader = generateDivElement("card-header").setText("Langues Parlées");
         Element divCardBody = generateDivElement("card-body");
         Element ul = new Element("ul").setAttribute("class", "list-group");
-        Element xslForEach = new Element("for-each", xslt).setAttribute("select","languages/element");
+        Element xslForEach = new Element("for-each", xslt).setAttribute("select", "languages/element");
         Element li = new Element("li").setAttribute("class", "list-group-item");
         Element valueOfName = new Element("value-of", xslt).setAttribute("select", "name");
 
@@ -363,13 +397,13 @@ public class InterfaceRecherchePays extends JFrame {
         return head;
     }
 
-    private Element generateDivElement(String attribute){
+    private Element generateDivElement(String attribute) {
         Element div = new Element("div");
         div.setAttribute("class", attribute);
         return div;
     }
 
-    public Set<String> xPathQuery(String expressions, XPathFactory xpath, Document document){
+    public Set<String> xPathQuery(String expressions, XPathFactory xpath, Document document) {
         XPathExpression<Element> expr = xpath.compile(expressions, Filters.element());
 
         List<Element> duplicatedElements = expr.evaluate(document);
@@ -378,14 +412,14 @@ public class InterfaceRecherchePays extends JFrame {
 
         elements.add("");
 
-        for (Element element : duplicatedElements){
+        for (Element element : duplicatedElements) {
             elements.add(element.getValue().trim());
         }
 
         return elements;
     }
 
-    public static void main(String ... args) {
+    public static void main(String... args) {
 
         new InterfaceRecherchePays(new File("countries.xml"));
 

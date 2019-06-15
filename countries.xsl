@@ -13,7 +13,7 @@
       <body>
         <div class="containers">
           <div class="row">
-            <xsl:for-each select="countries/element">
+            <xsl:for-each select="countries/element[languages/element/name=&quot;(Eastern) Punjabi&quot;]">
               <div class="col-2 mt-2 mx-auto">
                 <button class="btn btn-light" data-toggle="modal">
                   <xsl:attribute name="data-target">
