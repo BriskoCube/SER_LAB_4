@@ -11,10 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 import java.util.stream.Collectors;
 
 public class InterfaceRecherchePays extends JFrame {
@@ -26,6 +23,8 @@ public class InterfaceRecherchePays extends JFrame {
     private JButton createXSL = new JButton("Générer XSL");
     private JTextField superficieMin = new JTextField(5);
     private JTextField superficieMax = new JTextField(5);
+
+    private Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
 
     public InterfaceRecherchePays(File xmlFile) {
 
@@ -40,11 +39,7 @@ public class InterfaceRecherchePays extends JFrame {
 
                 try{
 
-                    Namespace xslt = Namespace.getNamespace("xsl", "http://www.w3.org/1999/XSL/Transform");
-
-
                     Element stylesheet = new Element("stylesheet", xslt);
-
                     stylesheet.setAttribute("version", "1.0");
 
                     // output
@@ -57,7 +52,7 @@ public class InterfaceRecherchePays extends JFrame {
 
                     // template
                     Element template = new Element("template", xslt);
-                    template.setAttribute("match", "/");
+                    template.setAttribute("match", "countries");
 
                     // html
                     Element html = new Element("html");
@@ -83,12 +78,8 @@ public class InterfaceRecherchePays extends JFrame {
                     //xmlOutputter.output(doc, System.out);
                     xmlOutputter.output(xslDocument, new FileOutputStream("countries.xsl"));
 
+                    System.out.println("XML File was created successfully!");
 
-                    // Utiliser les namespace pour xsl
-
-                    // Création des fichiers XSL selon ce qui est demandé
-
-                    /** A compléter... **/
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -181,7 +172,7 @@ public class InterfaceRecherchePays extends JFrame {
         Element rowDiv = generateDivElement("row");
 
         Element forEach = new Element("for-each", xslt);
-        forEach.setAttribute("select", "countries/element");
+        forEach.setAttribute("select", "element");
 
         // Génération des flags
         generateFlags(xslt, forEach);
@@ -235,7 +226,7 @@ public class InterfaceRecherchePays extends JFrame {
         // General Infos
         Element divCol2 = generateDivElement("col-6");
         Element pCapitale = new Element("p");
-        pCapitale.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Capitale: ', capitale)"));
+        pCapitale.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Capitale: ', capital)"));
         Element pPopulation = new Element("p");
         pPopulation.addContent(new Element("value-of", xslt).setAttribute("select", "concat('Population: ', population, ' habitants')"));
         Element pSuperficie = new Element("p");
@@ -369,25 +360,9 @@ public class InterfaceRecherchePays extends JFrame {
         return div;
     }
 
-    public Set<String> xPathQuery(String expressions, XPathFactory xpath, Document document){
-        XPathExpression<Element> expr = xpath.compile(expressions, Filters.element());
-
-        List<Element> duplicatedElements = expr.evaluate(document);
-
-        Set<String> elements = new HashSet<>();
-
-        elements.add("");
-
-        for (Element element : duplicatedElements){
-            elements.add(element.getValue().trim());
-        }
-
-        return elements;
-    }
-
     public static void main(String ... args) {
 
-        new InterfaceRecherchePays(new File("countries.xml"));
+        new InterfaceRecherchePays(new File("countries_NEW.xml"));
 
     }
 

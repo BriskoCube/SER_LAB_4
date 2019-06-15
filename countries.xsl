@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8" doctype-public="-//W3C//DTD HTML 4.01//EN" doctype-system="http://www.w3.org/TR/html4/strict.dtd" indent="yes" />
-  <xsl:template match="/">
+  <xsl:template match="countries">
     <html>
       <head>
         <style>.flag{max-width:20px;}</style>
@@ -13,7 +13,7 @@
       <body>
         <div class="containers">
           <div class="row">
-            <xsl:for-each select="countries/element">
+            <xsl:for-each select="element">
               <div class="col-2 mt-2 mx-auto">
                 <button class="btn btn-light" data-toggle="modal">
                   <xsl:attribute name="data-target">
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-6">
                           <p>
-                            <xsl:value-of select="concat('Capitale: ', capitale)" />
+                            <xsl:value-of select="concat('Capitale: ', capital)" />
                           </p>
                           <p>
                             <xsl:value-of select="concat('Population: ', population, ' habitants')" />

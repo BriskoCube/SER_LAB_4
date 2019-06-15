@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="countries.xsl"?>
+<?xmlversion = "1.0" encoding= "UTF-8" ?>
+
+<?xml-stylesheet
+        type = "text/xsl"
+        href= "countries.xsl"
+        ?>
+
 <countries>
    <element>
       <alpha2Code>AF</alpha2Code>
@@ -612,7 +617,7 @@
       <alpha2Code>AQ</alpha2Code>
       <alpha3Code>ATA</alpha3Code>
       <altSpellings />
-      <area>1.4E7</area>
+      <area>14000000</area>
       <borders />
       <callingCodes>
          <element>672</element>
@@ -14287,7 +14292,7 @@
          <de null="true" />
          <es>Kosovo</es>
          <fa>کوزوو</fa>
-         <fr null="true" />
+         <fr>Kosovo</fr>
          <hr>Kosovo</hr>
          <it null="true" />
          <ja null="true" />
@@ -14457,7 +14462,7 @@
          <element>Российская Федерация</element>
          <element>Rossiyskaya Federatsiya</element>
       </altSpellings>
-      <area>1.7124442E7</area>
+      <area>17124442000000</area>
       <borders>
          <element>AZE</element>
          <element>BLR</element>
